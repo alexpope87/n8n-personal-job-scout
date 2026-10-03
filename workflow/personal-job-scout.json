@@ -9,11 +9,11 @@
           "parameters": [
             {
               "name": "app_id",
-              "value": "e486a907"
+              "value": "YOUR_ADZUNA_APP_ID"
             },
             {
               "name": "app_key",
-              "value": "c4802940967edb7f566726e85d7fab27"
+              "value": "YOUR_ADZUNA_APP_KEY"
             },
             {
               "name": "results_per_page",
