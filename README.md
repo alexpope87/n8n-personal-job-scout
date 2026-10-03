@@ -23,7 +23,7 @@ The automation runs daily and follows this process:
 
 ## Workflow
 
-![n8n Job Scout Workflow](screenshots/workflow.png)
+![n8n Job Scout Workflow](workflow/screen%20jobscout%20n8n.PNG)
 
 ## Tech Stack
 
