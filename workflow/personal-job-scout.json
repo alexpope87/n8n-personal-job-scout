@@ -1,1 +1,371 @@
 
+{
+  "name": "Personal Job Scout",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.adzuna.com/v1/api/jobs/it/search/1",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "app_id",
+              "value": YOUR_ADZUNA_APP_ID
+            },
+            {
+              "name": "app_key",
+              "value": YOUR_ADZUNA_APP_KEY
+            },
+            {
+              "name": "results_per_page",
+              "value": "5"
+            },
+            {
+              "name": "what",
+              "value": "business analyst"
+            },
+            {
+              "name": "where",
+              "value": "milano"
+            },
+            {
+              "name": "sort_by",
+              "value": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "daa61fae-e89c-4b64-908b-754667a0cc7b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "results",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "58bf5c09-cfae-4f5c-80aa-5bdb36bccd34",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c8ce2133-ff85-4d0a-ba75-5092f41c7a37",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}",
+              "rightValue": "magazzino",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "c08389ac-ae8c-4e46-9494-272aefd8e0c8",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}\n\ndoes not contain\n\nimport",
+              "rightValue": "export",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "e5b344bc-1795-401a-8638-b4b736bc4170",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}  does not contain  import",
+              "rightValue": "freight",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "1af1833c-b3cd-4e86-9641-f17db8852f7f",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}  does not contain  import",
+              "rightValue": "spedizioni",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "e1865199-7cfe-414d-8ad1-bd3ca299ca00",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}\n\ndoes not contain\n\nimport",
+              "rightValue": "logistica",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        896,
+        0
+      ],
+      "id": "7ec233df-7058-42a3-a878-67927bb4e912",
+      "name": "Filter Exclude Unwanted Roles"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4f56d33e-1f60-4aca-8081-057eecb02a1b",
+              "leftValue": "={{ ($json.title || '').toLowerCase() }}",
+              "rightValue": "business analyst",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "94d8ad67-7aef-49e6-9450-6b840915099b",
+              "leftValue": "",
+              "rightValue": "analyst",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4851ec16-5c3b-4ac9-8fd4-a4d5b94fe15b",
+              "leftValue": "={{ ($json.title || '').toLowerCase() }}",
+              "rightValue": "automation",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "962aa632-5fcc-4f20-bb7a-deb1a95af257",
+              "leftValue": "={{ ($json.title || '').toLowerCase() }}",
+              "rightValue": "artificial intelligence",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "e6cc34b7-58fc-4bf7-b9ed-28cab60cf916",
+              "leftValue": "={{ ($json.title || '').toLowerCase() }}",
+              "rightValue": "ai analyst",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "cf97d5b9-3b74-43a7-9287-b5b5d70ce4bc",
+              "leftValue": "={{ ($json.title || '').toLowerCase() }}",
+              "rightValue": "intelligenza artificiale",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        672,
+        0
+      ],
+      "id": "f84b03a9-b01d-46e6-8d7f-27c2a1c50e92",
+      "name": "Target Roles"
+    },
+    {
+      "parameters": {
+        "sendTo": "alessandropapa87@googlemail.com",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.report }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        0
+      ],
+      "id": "64d6ee29-c50c-4f8c-826f-6f31f743f738",
+      "name": "Send a message",
+      "webhookId": "3c578636-1695-4920-8c5b-9ebbcc6a80ad",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "v62GC9oIB5ePSaxs",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const jobs = $input.all();\n\nconst report = jobs.map((item, index) => {\n  const job = item.json;\n\n  const title = job.title || 'Titolo non disponibile';\n  const company = job.company?.display_name || 'Azienda non specificata';\n  const location = job.location?.display_name || 'Località non specificata';\n  const created = job.created\n    ? new Date(job.created).toLocaleDateString('it-IT')\n    : 'Data non disponibile';\n  const url = job.redirect_url || 'Link non disponibile';\n\n  return `${index + 1}. ${title}\nAzienda: ${company}\nLocalità: ${location}\nPubblicato: ${created}\nLink: ${url}`;\n}).join('\\n\\n-----------------------------\\n\\n');\n\nreturn [\n  {\n    json: {\n      subject: `Job Scout - ${jobs.length} opportunità trovate`,\n      report: `PERSONAL JOB SCOUT\n\nHo trovato ${jobs.length} annunci compatibili con i tuoi criteri.\n\n${report}`\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        0
+      ],
+      "id": "6dc30937-ed7d-47ca-a810-5d7feecaa6f6",
+      "name": "Build Email Report"
+    },
+    {
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "dedupeValue": "={{ $json.id || $json.redirect_url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        0
+      ],
+      "id": "260e64ab-c4d5-449b-93b1-d2b52c317d29",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 18
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4254becd-97b0-4971-b886-3722119cce33",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Target Roles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Target Roles": {
+      "main": [
+        [
+          {
+            "node": "Filter Exclude Unwanted Roles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Exclude Unwanted Roles": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Email Report": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "Build Email Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "21db4a89-cac0-45a2-81ca-7581c2d4ce42",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c80684caaf4ad284acde007346c1230969d433c0fdf94f65066ccea54d4c69ee"
+  },
+  "nodeGroups": [],
+  "id": "O3wt2YXPzTzvPVcA",
+  "tags": []
+}
+
+
+
