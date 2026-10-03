@@ -1,4 +1,3 @@
-
 {
   "name": "Personal Job Scout",
   "nodes": [
@@ -10,11 +9,11 @@
           "parameters": [
             {
               "name": "app_id",
-              "value": YOUR_ADZUNA_APP_ID
+              "value": "e486a907"
             },
             {
               "name": "app_key",
-              "value": YOUR_ADZUNA_APP_KEY
+              "value": "c4802940967edb7f566726e85d7fab27"
             },
             {
               "name": "results_per_page",
@@ -80,7 +79,7 @@
             },
             {
               "id": "c08389ac-ae8c-4e46-9494-272aefd8e0c8",
-              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}\n\ndoes not contain\n\nimport",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}",
               "rightValue": "export",
               "operator": {
                 "type": "string",
@@ -89,7 +88,7 @@
             },
             {
               "id": "e5b344bc-1795-401a-8638-b4b736bc4170",
-              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}  does not contain  import",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}  ",
               "rightValue": "freight",
               "operator": {
                 "type": "string",
@@ -98,7 +97,7 @@
             },
             {
               "id": "1af1833c-b3cd-4e86-9641-f17db8852f7f",
-              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}  does not contain  import",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}  ",
               "rightValue": "spedizioni",
               "operator": {
                 "type": "string",
@@ -107,7 +106,7 @@
             },
             {
               "id": "e1865199-7cfe-414d-8ad1-bd3ca299ca00",
-              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}\n\ndoes not contain\n\nimport",
+              "leftValue": "={{ (($json.title || '') + ' ' + ($json.description || '')).toLowerCase() }}",
               "rightValue": "logistica",
               "operator": {
                 "type": "string",
@@ -153,8 +152,7 @@
               "rightValue": "analyst",
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "contains"
               }
             },
             {
@@ -163,8 +161,7 @@
               "rightValue": "automation",
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "contains"
               }
             },
             {
@@ -173,8 +170,7 @@
               "rightValue": "artificial intelligence",
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "contains"
               }
             },
             {
@@ -183,8 +179,7 @@
               "rightValue": "ai analyst",
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "contains"
               }
             },
             {
@@ -193,8 +188,7 @@
               "rightValue": "intelligenza artificiale",
               "operator": {
                 "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "operation": "contains"
               }
             }
           ],
@@ -213,7 +207,7 @@
     },
     {
       "parameters": {
-        "sendTo": "YOUR_EMAIL@example.com",
+        "sendTo": "alessandropapa87@googlemail.com",
         "subject": "={{ $json.subject }}",
         "emailType": "text",
         "message": "={{ $json.report }}",
@@ -357,7 +351,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "21db4a89-cac0-45a2-81ca-7581c2d4ce42",
+  "versionId": "e151c44f-34b9-41ff-bb1f-e17fce06a013",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c80684caaf4ad284acde007346c1230969d433c0fdf94f65066ccea54d4c69ee"
@@ -366,6 +360,3 @@
   "id": "O3wt2YXPzTzvPVcA",
   "tags": []
 }
-
-
-
