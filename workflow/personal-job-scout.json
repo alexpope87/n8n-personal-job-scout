@@ -147,15 +147,6 @@
               }
             },
             {
-              "id": "94d8ad67-7aef-49e6-9450-6b840915099b",
-              "leftValue": "",
-              "rightValue": "analyst",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
               "id": "4851ec16-5c3b-4ac9-8fd4-a4d5b94fe15b",
               "leftValue": "={{ ($json.title || '').toLowerCase() }}",
               "rightValue": "automation",
@@ -207,7 +198,7 @@
     },
     {
       "parameters": {
-        "sendTo": "alessandropapa87@googlemail.com",
+        "sendTo": "YOUR_EMAIL",
         "subject": "={{ $json.subject }}",
         "emailType": "text",
         "message": "={{ $json.report }}",
@@ -351,7 +342,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "e151c44f-34b9-41ff-bb1f-e17fce06a013",
+  "versionId": "312c5327-ff5b-49e5-99da-b1a9f0250c5a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c80684caaf4ad284acde007346c1230969d433c0fdf94f65066ccea54d4c69ee"
