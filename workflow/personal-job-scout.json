@@ -3,63 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "url": "https://api.adzuna.com/v1/api/jobs/it/search/1",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "app_id",
-              "value": "YOUR_ADZUNA_APP_ID"
-            },
-            {
-              "name": "app_key",
-              "value": "YOUR_ADZUNA_APP_KEY"
-            },
-            {
-              "name": "results_per_page",
-              "value": "5"
-            },
-            {
-              "name": "what",
-              "value": "business analyst"
-            },
-            {
-              "name": "where",
-              "value": "milano"
-            },
-            {
-              "name": "sort_by",
-              "value": "date"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
-      "position": [
-        224,
-        0
-      ],
-      "id": "daa61fae-e89c-4b64-908b-754667a0cc7b",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "results",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        448,
-        0
-      ],
-      "id": "58bf5c09-cfae-4f5c-80aa-5bdb36bccd34",
-      "name": "Split Out"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -121,7 +64,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        896,
+        1120,
         0
       ],
       "id": "7ec233df-7058-42a3-a878-67927bb4e912",
@@ -190,15 +133,15 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        672,
-        0
+        944,
+        32
       ],
       "id": "f84b03a9-b01d-46e6-8d7f-27c2a1c50e92",
       "name": "Target Roles"
     },
     {
       "parameters": {
-        "sendTo": "YOUR_EMAIL",
+        "sendTo": "alessandropapa87@googlemail.com",
         "subject": "={{ $json.subject }}",
         "emailType": "text",
         "message": "={{ $json.report }}",
@@ -207,7 +150,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1568,
+        1792,
         0
       ],
       "id": "64d6ee29-c50c-4f8c-826f-6f31f743f738",
@@ -227,7 +170,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1344,
+        1568,
         0
       ],
       "id": "6dc30937-ed7d-47ca-a810-5d7feecaa6f6",
@@ -242,7 +185,7 @@
       "type": "n8n-nodes-base.removeDuplicates",
       "typeVersion": 2,
       "position": [
-        1120,
+        1344,
         0
       ],
       "id": "260e64ab-c4d5-449b-93b1-d2b52c317d29",
@@ -266,32 +209,124 @@
       ],
       "id": "4254becd-97b0-4971-b886-3722119cce33",
       "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://it.jooble.org/api/"YOUR_JOOBLE_API_KEY",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"keywords\": \"business analyst\",\n  \"location\": \"Milano\",\n  \"radius\": \"40\",\n  \"page\": 1,\n  \"ResultOnPage\": 5,\n  \"companysearch\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        160,
+        192
+      ],
+      "id": "f03b93c6-2010-4103-8478-f2924a01fd39",
+      "name": "HTTP Request1 Jooble API"
+    },
+    {
+      "parameters": {
+        "url": "https://api.adzuna.com/v1/api/jobs/it/search/1",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "app_id",
+              "value": "e486a907"
+            },
+            {
+              "name": "app_key",
+              "value": "c4802940967edb7f566726e85d7fab27"
+            },
+            {
+              "name": "results_per_page",
+              "value": "5"
+            },
+            {
+              "name": "what",
+              "value": "business analyst"
+            },
+            {
+              "name": "where",
+              "value": "milano"
+            },
+            {
+              "name": "sort_by",
+              "value": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        192,
+        -240
+      ],
+      "id": "daa61fae-e89c-4b64-908b-754667a0cc7b",
+      "name": "HTTP Request Adzuna"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "results",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -240
+      ],
+      "id": "58bf5c09-cfae-4f5c-80aa-5bdb36bccd34",
+      "name": "Split Out Adzuna"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "jobs",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        352,
+        192
+      ],
+      "id": "1ffa90cc-f7b4-4842-94e4-b44850fe3e40",
+      "name": "Split Out Jooble"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  json: {\n    id: $json.id,\n    title: $json.title,\n    description: $json.snippet || '',\n    company: {\n      display_name: $json.company || $json.source || 'Azienda non specificata'\n    },\n    location: {\n      display_name: $json.location || 'Località non specificata'\n    },\n    created: $json.updated || '',\n    redirect_url: $json.link || '',\n    source: 'Jooble'\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        192
+      ],
+      "id": "bfb24758-6cfe-418a-bfb8-3a7ab0b7591c",
+      "name": "Normalize Jooble"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        720,
+        32
+      ],
+      "id": "42bf3f02-7f40-44c8-97a7-d04b15896f45",
+      "name": "Merge"
     }
   ],
   "pinData": {},
   "connections": {
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "Split Out",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Out": {
-      "main": [
-        [
-          {
-            "node": "Target Roles",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Target Roles": {
       "main": [
         [
@@ -335,6 +370,88 @@
           }
         ]
       ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1 Jooble API",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request Adzuna",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1 Jooble API": {
+      "main": [
+        [
+          {
+            "node": "Split Out Jooble",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request Adzuna": {
+      "main": [
+        [
+          {
+            "node": "Split Out Adzuna",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Adzuna": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Jooble": {
+      "main": [
+        [
+          {
+            "node": "Normalize Jooble",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Jooble": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Target Roles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -342,7 +459,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "312c5327-ff5b-49e5-99da-b1a9f0250c5a",
+  "versionId": "e774c303-3574-4717-ad3a-b4aaa2494cab",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c80684caaf4ad284acde007346c1230969d433c0fdf94f65066ccea54d4c69ee"
